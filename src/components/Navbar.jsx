@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <div>
       <nav id="desktop-nav">
-        <div className="logo">Emkay</div>
+        <div className="logo">3mkay</div>
         <div>
           <ul className="nav-links">
             <li>
