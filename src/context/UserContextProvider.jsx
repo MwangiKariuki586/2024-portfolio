@@ -17,16 +17,23 @@ const UserContextProvider = ({ children }) => {
   const [backendexperience, setBackendexperience] = useState([]);
   const [databasesxperience, setDatabasesexperience] = useState([]);
   const [projects, setProjects] = useState([]);
-  const fetchAboutinfo = () => {
-    axios
-      .get(aboutinfo)
-      .then((res) => {
-        setAbout(res.data[0]);
-        // console.log(res.data[0]);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+  const fetchAboutinfo = async () => {
+    try {
+      const res = await axios.get(aboutinfo);
+      console.log(res.data);
+      setAbout(res.data[0]);
+    } catch (err) {
+      console.log(err);
+    }
+    // axios
+    //   .get(aboutinfo)
+    //   .then((res) => {
+    //     setAbout(res.data[0]);
+    //     console.log(res.data[0]);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
   const fetchFrontendexperience = () => {
     axios
@@ -65,7 +72,7 @@ const UserContextProvider = ({ children }) => {
     axios
       .get(projectsinfo)
       .then((res) => {
-        //console.log(res.data);
+        console.log(res.data);
         setProjects(res.data);
       })
       .catch((err) => {

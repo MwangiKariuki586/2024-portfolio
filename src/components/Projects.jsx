@@ -15,8 +15,8 @@ const Projects = () => {
             <div key={id} className="details-container color-container">
               <div className="article-container">
                 <img
-                  src={`${staticfiles}${project.project_image}`}
-                  alt="Project image"
+                  src={`data:${project.project_image.contentType};base64,${project.project_image.data}`}
+                  alt={project.project_name}
                   className="project-img"
                 />
               </div>

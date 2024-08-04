@@ -1,11 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../context/UserContext";
-import { staticfiles } from "../vaiables";
 import experience_logo from "../assets/experience.png";
 import education_logo from "../assets/education.png";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+
 const About = () => {
   const { about } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (about) {
+      setLoading(false);
+    }
+  }, [about]);
+
+  const defaultImage = {
+    contentType: "image/png",
+    data: "", // default empty base64 string
+  };
+
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading message or spinner
+  }
+
   return (
     <section id="about">
       <p className="section__text__p1">Get To Know More</p>
@@ -13,7 +30,7 @@ const About = () => {
       <div className="section-container">
         <div className="section__pic-container">
           <img
-            src={`${staticfiles}${about.second_image}`}
+            src={about?.second_image_url}
             alt="Profile picture"
             className="about-pic"
           />
@@ -28,7 +45,7 @@ const About = () => {
               />
               <h3>Experience</h3>
               <p>
-                {about.years_of_experience} years <br />
+                {about?.years_of_experience ?? ""} years of <br />
                 Frontend Development
               </p>
             </div>
@@ -39,11 +56,11 @@ const About = () => {
                 className="png-icon"
               />
               <h3>Education</h3>
-              <p>{about.course_studied}</p>
+              <p>{about?.course_studied ?? ""}</p>
             </div>
           </div>
           <div className="text-container">
-            <p>{about.description}</p>
+            <p>{about?.description ?? ""}</p>
           </div>
         </div>
       </div>
