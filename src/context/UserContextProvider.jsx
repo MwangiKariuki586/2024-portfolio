@@ -20,10 +20,10 @@ const UserContextProvider = ({ children }) => {
   const fetchAboutinfo = async () => {
     try {
       const res = await axios.get(aboutinfo);
-      console.log(res.data);
+      //console.log(res.data);
       setAbout(res.data[0]);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
     // axios
     //   .get(aboutinfo)
@@ -72,7 +72,7 @@ const UserContextProvider = ({ children }) => {
     axios
       .get(projectsinfo)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setProjects(res.data);
       })
       .catch((err) => {
