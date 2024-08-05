@@ -28,7 +28,7 @@ const Navbar = () => {
         </div>
       </nav>
       <nav id="hamburger-nav">
-        <div className="logo">Emkay</div>
+        <div className="logo">3mkay</div>
         <div className="hamburger-menu">
           <div
             className={open ? "hamburger-icon open" : "hamburger-icon"}
