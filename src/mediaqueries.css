@@ -49,6 +49,9 @@
     .about-containers {
       margin-top: 0;
     }
+    .skeleton-size{
+      width: 20vh;
+    }
     
   }
   
@@ -113,6 +116,9 @@
       width:190px;
       height: 190px;
     }
+    .project-skeletons{
+      flex-direction: column;
+    }
   }
   @media screen and (max-width: 280px){
     .regalia{
@@ -122,5 +128,8 @@
     .about-pic{
       width:150px;
       height: 150px;
+    }
+    .project-skeletons{
+      flex-direction: column;
     }
   }

@@ -309,7 +309,15 @@ section {
   margin-bottom: 2rem;
   margin-top: 2rem;
 }
-
+.project-skeletons{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.skeleton-size{
+  width: 30vh;
+  height: 300px;
+}
 .about-details-container {
   justify-content: center;
   flex-direction: column;
@@ -339,7 +347,9 @@ section {
   right: -5rem;
   bottom: 2.5rem;
 }
-
+.centered{
+  margin: auto;
+}
 .details-container {
   padding: 1.5rem;
   flex: 1;
@@ -376,6 +386,7 @@ section {
 
 .experience-details-container {
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
 }

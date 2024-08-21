@@ -3,6 +3,8 @@ import UserContext from "../context/UserContext";
 import experience_logo from "../assets/experience.png";
 import education_logo from "../assets/education.png";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const About = () => {
   const { about } = useContext(UserContext);
@@ -19,9 +21,9 @@ const About = () => {
     data: "", // default empty base64 string
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Display a loading message or spinner
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>; // Display a loading message or spinner
+  // }
 
   return (
     <section id="about">
@@ -29,11 +31,15 @@ const About = () => {
       <h1 className="title">About Me</h1>
       <div className="section-container">
         <div className="section__pic-container">
-          <img
-            src={about?.second_image_url}
-            alt="Profile picture"
-            className="about-pic"
-          />
+          {about.second_image_url && about.second_image_url.length > 0 ? (
+            <img
+              src={about?.second_image_url}
+              alt="Profile picture"
+              className="about-pic"
+            />
+          ) : (
+            <Skeleton className="about-pic" />
+          )}
         </div>
         <div className="about-details-container">
           <div className="about-containers">
@@ -44,11 +50,16 @@ const About = () => {
                 className="png-icon"
               />
               <h3>Experience</h3>
-              <p>
-                {about?.years_of_experience ?? ""} years of <br />
-                Frontend Development
-              </p>
+              {about.second_image_url && about.second_image_url.length > 0 ? (
+                <p>
+                  {about?.years_of_experience ?? ""} years of <br />
+                  Frontend Development
+                </p>
+              ) : (
+                <Skeleton count={3} borderRadius="2rem" />
+              )}
             </div>
+
             <div className="details-container">
               <img
                 src={education_logo}
@@ -56,11 +67,19 @@ const About = () => {
                 className="png-icon"
               />
               <h3>Education</h3>
-              <p>{about?.course_studied ?? ""}</p>
+              <p>
+                {about?.course_studied ?? (
+                  <Skeleton count={3} borderRadius="2rem" />
+                )}
+              </p>
             </div>
           </div>
           <div className="text-container">
-            <p>{about?.description ?? ""}</p>
+            <p>
+              {about?.description ?? (
+                <Skeleton height={150} borderRadius="2rem" />
+              )}
+            </p>
           </div>
         </div>
       </div>

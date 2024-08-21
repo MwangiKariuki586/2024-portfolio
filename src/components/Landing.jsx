@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Landing = () => {
   const { about } = useContext(UserContext);
@@ -42,54 +44,70 @@ const Landing = () => {
   return (
     <section id="profile">
       <div className="section__pic-container">
-        <img
-          className="regalia"
-          src={about?.first_image_url}
-          alt="Profile picture"
-        />
+        {about?.first_image_url && about.first_image_url.length > 0 ? (
+          <img className="regalia" src={about.first_image_url} alt="" />
+        ) : (
+          <Skeleton className="regalia" />
+        )}
       </div>
       <div className="section__text">
-        <p className="section__text__p1">{about?.greetings ?? ""}</p>
-        <h1 className="title">{about?.full_name ?? ""}</h1>
-        <p className="section__text__p2">{about?.title ?? ""}</p>
+        <p className="section__text__p1">{about?.greetings ?? <Skeleton />}</p>
+        <h1 className="title">{about?.full_name ?? <Skeleton />}</h1>
+        <p className="section__text__p2">{about?.title ?? <Skeleton />}</p>
         <div className="btn-container">
-          <button
-            className="btn btn-color-2"
-            onClick={() =>
-              handleResumeDownload(
-                about?.resume?.data,
-                about?.resume?.contentType
-              )
-            }
-          >
-            Download CV
-          </button>
-          <button
-            className="btn btn-color-1"
-            onClick={() => {
-              window.location.hash = "#contact";
-            }}
-          >
-            Contact Info
-          </button>
+          {about?.first_image_url && about.first_image_url.length > 0 ? (
+            <button
+              className="btn btn-color-2"
+              onClick={() =>
+                handleResumeDownload(
+                  about?.resume?.data,
+                  about?.resume?.contentType
+                )
+              }
+            >
+              Download CV
+            </button>
+          ) : (
+            <Skeleton width="8rem" borderRadius="2rem" height="3rem" />
+          )}
+          {about?.first_image_url && about.first_image_url.length > 0 ? (
+            <button
+              className="btn btn-color-1"
+              onClick={() => {
+                window.location.hash = "#contact";
+              }}
+            >
+              Contact Info
+            </button>
+          ) : (
+            <Skeleton width="8rem" borderRadius="2rem" height="3rem" />
+          )}
         </div>
         <div id="socials-container">
-          <FaLinkedin
-            className="icon"
-            onClick={() => {
-              if (about?.linkedin) {
-                window.open(about.linkedin, "_blank");
-              }
-            }}
-          />
-          <FaGithub
-            className="icon"
-            onClick={() => {
-              if (about?.github) {
-                window.open(about.github, "_blank");
-              }
-            }}
-          />
+          {about?.first_image_url && about.first_image_url.length > 0 ? (
+            <FaLinkedin
+              className="icon"
+              onClick={() => {
+                if (about?.linkedin) {
+                  window.open(about.linkedin, "_blank");
+                }
+              }}
+            />
+          ) : (
+            <Skeleton width="3rem" borderRadius="50%" height="3rem" />
+          )}
+          {about?.first_image_url && about.first_image_url.length > 0 ? (
+            <FaGithub
+              className="icon"
+              onClick={() => {
+                if (about?.github) {
+                  window.open(about.github, "_blank");
+                }
+              }}
+            />
+          ) : (
+            <Skeleton width="3rem" borderRadius="50%" height="3rem" />
+          )}
         </div>
       </div>
       {/* <MdOutlineKeyboardDoubleArrowDown
