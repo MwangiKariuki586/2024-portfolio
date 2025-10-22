@@ -1,12 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import UserContext from "../context/UserContext";
+import  {  useState, useEffect } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import {about} from "../data"
 
 const Landing = () => {
-  const { about } = useContext(UserContext);
+ // const { about } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,25 +19,19 @@ const Landing = () => {
     data: "", // default empty base64 string
   };
 
-  const handleResumeDownload = (
-    resumeData = "",
-    resumeContentType = "application/pdf"
-  ) => {
-    const blob = new Blob(
-      [Uint8Array.from(atob(resumeData), (c) => c.charCodeAt(0))],
-      { type: resumeContentType }
-    );
-    const url = URL.createObjectURL(blob);
+  const handleResumeDownload = () => {
+    // Directly use the resume path from the about object
     const link = document.createElement("a");
-    link.href = url;
-    link.download = "resume.pdf";
+    link.href = about.resume;
+    link.download = "Alex Mwangi Fullstack developer resume.pdf";
+    link.target = "_blank"; // Open in a new tab if download doesn't start
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading message or spinner
+    return <Skeleton />; // Display a loading message or spinner
   }
 
   return (
@@ -58,12 +51,7 @@ const Landing = () => {
           {about?.first_image_url && about.first_image_url.length > 0 ? (
             <button
               className="btn btn-color-2"
-              onClick={() =>
-                handleResumeDownload(
-                  about?.resume?.data,
-                  about?.resume?.contentType
-                )
-              }
+              onClick={handleResumeDownload}
             >
               Download CV
             </button>
