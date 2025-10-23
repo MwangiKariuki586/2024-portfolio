@@ -3,9 +3,10 @@ import experience_icon from "../assets/checkmark.png";
 import UserContext from "../context/UserContext";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import Skeleton from "react-loading-skeleton";
+import { frontendexperience,databasesxperience,backendexperience } from "../data";
 const Experience = () => {
-  const { frontendexperience, backendexperience, databasesxperience } =
-    useContext(UserContext);
+// const { frontendexperience, backendexperience, databasesxperience } =
+//      useContext(UserContext);
   return (
     <section id="experience">
       <p className="section__text__p1">Explore My</p>

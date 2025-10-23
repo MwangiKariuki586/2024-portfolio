@@ -5,16 +5,17 @@ import education_logo from "../assets/education.png";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { about } from "../data";
 
 const About = () => {
-  const { about } = useContext(UserContext);
+  // const { about } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (about) {
-      setLoading(false);
-    }
-  }, [about]);
+  // useEffect(() => {
+  //   if (about) {
+  //     setLoading(false);
+  //   }
+  // }, [about]);
 
   const defaultImage = {
     contentType: "image/png",
@@ -53,7 +54,7 @@ const About = () => {
               {about.second_image_url && about.second_image_url.length > 0 ? (
                 <p>
                   {about?.years_of_experience ?? ""} years of <br />
-                  Frontend Development
+                  Fullstack Development
                 </p>
               ) : (
                 <Skeleton count={3} borderRadius="2rem" />
@@ -72,6 +73,7 @@ const About = () => {
                   <Skeleton count={3} borderRadius="2rem" />
                 )}
               </p>
+              <h5>KCA Universtity</h5>
             </div>
           </div>
           <div className="text-container">
