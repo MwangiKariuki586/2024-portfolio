@@ -67,3 +67,11 @@ export const databasesxperience = [
     level_rank: 2,
   },
 ];
+export const projects = [
+  {
+    project_name: "Veterans bay",
+    project_image: "/projects/veterans_bay.png",
+    github_link: "https://github.com/MwangiKariuki586/veterans-bay",
+    demo_link: "https://veterans-bay-main.vercel.app/",
+  },
+];

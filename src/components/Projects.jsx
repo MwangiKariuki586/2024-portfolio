@@ -3,9 +3,8 @@ import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import UserContext from "../context/UserContext";
 import { staticfiles } from "../vaiables";
 import Skeleton from "react-loading-skeleton";
-
+import { projects } from "../data";
 const Projects = () => {
-  const { projects } = useContext(UserContext);
   return (
     <section id="projects">
       <p className="section__text__p1">Browse My Recent</p>
@@ -17,7 +16,7 @@ const Projects = () => {
               <div key={id} className="details-container color-container">
                 <div className="article-container">
                   <img
-                    src={`data:${project.project_image.contentType};base64,${project.project_image.data}`}
+                    src={project.project_image}
                     alt={project.project_name}
                     className="project-img"
                   />
