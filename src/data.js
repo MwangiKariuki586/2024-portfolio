@@ -74,4 +74,10 @@ export const projects = [
     github_link: "https://github.com/MwangiKariuki586/veterans-bay",
     demo_link: "https://veterans-bay-main.vercel.app/",
   },
+  {
+    project_name: "Verified Nyumba",
+    project_image: "/projects/verified_nyumba.png",
+    github_link: "https://github.com/MwangiKariuki586/2024-portfolio",
+    demo_link: "https://house-hunting-app.vercel.app/",
+  }
 ];
