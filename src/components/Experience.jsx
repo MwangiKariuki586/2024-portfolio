@@ -3,10 +3,10 @@ import experience_icon from "../assets/checkmark.png";
 import UserContext from "../context/UserContext";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import Skeleton from "react-loading-skeleton";
-import { frontendexperience,databasesxperience,backendexperience } from "../data";
+import { frontendexperience, databasesxperience, backendexperience } from "../data";
 const Experience = () => {
-// const { frontendexperience, backendexperience, databasesxperience } =
-//      useContext(UserContext);
+  // const { frontendexperience, backendexperience, databasesxperience } =
+  //      useContext(UserContext);
   return (
     <section id="experience">
       <p className="section__text__p1">Explore My</p>
@@ -24,9 +24,9 @@ const Experience = () => {
                       alt="Experience icon"
                       className="png-icon"
                     />
-                    <div>
-                      <h3>{frontend.technology}</h3>
-                      <p>{frontend.level_rank} years</p>
+                    <div className="article__text">
+                      <h5 className="experience-tech-title">{frontend.technology}</h5>
+                      <p>{frontend.level_rank ? frontend.level_rank <= 1 ? `${frontend.level_rank} year` : `${frontend.level_rank} years` : ""}</p>
                     </div>
                   </article>
                 ))}
@@ -48,9 +48,9 @@ const Experience = () => {
                       alt="Experience icon"
                       className="png-icon"
                     />
-                    <div>
-                      <h3>{backend.technology}</h3>
-                      <p>{backend.level_rank} years</p>
+                    <div className="article__text">
+                      <h5 className="experience-tech-title">{backend.technology}</h5>
+                      <p>{backend.level_rank ? backend.level_rank <= 1 ? `${backend.level_rank} year` : `${backend.level_rank} years` : ""}</p>
                     </div>
                   </article>
                 ))}
@@ -61,7 +61,7 @@ const Experience = () => {
               <Skeleton width={200} height={200} borderRadius="2rem" />
             </div>
           )}
-          {databasesxperience && backendexperience?.length > 0 ? (
+          {databasesxperience && databasesxperience?.length > 0 ? (
             <div className="details-container">
               <h2 className="experience-sub-title">Databases</h2>
               <div className="article-container">
@@ -72,9 +72,9 @@ const Experience = () => {
                       alt="Experience icon"
                       className="png-icon"
                     />
-                    <div>
-                      <h3>{database.technology}</h3>
-                      <p>{database.level_rank} years</p>
+                    <div className="article__text">
+                      <h5 className="experience-tech-title">{database.technology}</h5>
+                      <p>{database.level_rank ? database.level_rank <= 1 ? `${database.level_rank} year` : `${database.level_rank} years` : ""}</p>
                     </div>
                   </article>
                 ))}

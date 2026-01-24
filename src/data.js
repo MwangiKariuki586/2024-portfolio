@@ -77,7 +77,15 @@ export const projects = [
   {
     project_name: "Verified Nyumba",
     project_image: "/projects/verified_nyumba.png",
-    github_link: "https://github.com/MwangiKariuki586/2024-portfolio",
+    github_link: "https://github.com/MwangiKariuki586/house-hunting-app",
     demo_link: "https://house-hunting-app.vercel.app/",
+  },
+  {
+    project_name: "Chat app",
+    project_image: "/projects/chat.png",
+    github_link: "https://github.com/MwangiKariuki586/chat-app",
+    demo_link: "https://chat-app-two-teal.vercel.app/",
+      
+    
   }
 ];

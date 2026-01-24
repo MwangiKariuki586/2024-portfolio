@@ -104,7 +104,8 @@ a:hover {
   overflow: hidden;
   transition: all 0.3 ease-in-out;
 }
-.blur-span{
+
+.blur-span {
   position: absolute;
   cursor: pointer;
   right: 5%;
@@ -112,9 +113,11 @@ a:hover {
   color: white;
   transition: all 0.3 ease-in-out;
 }
-.blur-span .close-icon{
+
+.blur-span .close-icon {
   font-size: 30px;
 }
+
 .menu-links a {
   display: block;
   padding: 10px;
@@ -130,25 +133,28 @@ a:hover {
 }
 
 .menu-links.open {
-  background-color: rgba(0, 0, 0, 0.979); 
-  width: 100vw; 
-  min-height: 100vh; 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 25px; 
-  opacity: 1; 
+  background-color: rgba(0, 0, 0, 0.979);
+  width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  opacity: 1;
   z-index: 6676767;
-  visibility: visible; 
-  transition: opacity 1.5s ease, visibility 1.5s ease; /* Smooth transition */
+  visibility: visible;
+  transition: opacity 1.5s ease, visibility 1.5s ease;
+  /* Smooth transition */
 }
-.menu-links.open a{
+
+.menu-links.open a {
   color: white;
 }
+
 .hamburger-icon.open span:first-child {
   transform: rotate(45deg) translate(10px, 5px);
 }
@@ -202,17 +208,20 @@ section {
   width: 400px;
   margin: auto 0;
 }
-.regalia{
+
+.regalia {
 
   border-radius: 50%;
   width: 400px;
   height: 400px;
   transition: filter 1.5s ease-in-out;
 }
-.regalia:hover{
+
+.regalia:hover {
   filter: grayscale(95%);
- 
+
 }
+
 .section__text {
   align-self: center;
   text-align: center;
@@ -247,7 +256,7 @@ section {
 
 .icon {
   cursor: pointer;
-  font-size:2rem;
+  font-size: 2rem;
 }
 
 /* BUTTONS */
@@ -309,15 +318,18 @@ section {
   margin-bottom: 2rem;
   margin-top: 2rem;
 }
-.project-skeletons{
+
+.project-skeletons {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-.skeleton-size{
+
+.skeleton-size {
   width: 30vh;
   height: 300px;
 }
+
 .about-details-container {
   justify-content: center;
   flex-direction: column;
@@ -335,21 +347,26 @@ section {
   width: 260px;
   transition: filter 1.5s ease-in-out;
 }
-.about-pic:hover{
+
+.about-pic:hover {
   filter: grayscale(95%);
 }
+
 .png-icon {
   cursor: pointer;
   height: 2rem;
 }
+
 .arrow {
   position: absolute;
   right: -5rem;
   bottom: 2.5rem;
 }
-.centered{
+
+.centered {
   margin: auto;
 }
+
 .details-container {
   padding: 1.5rem;
   flex: 1;
@@ -370,6 +387,8 @@ section {
   width: 400px;
   margin: auto 0;
 }
+
+
 
 /* EXPERIENCE SECTION */
 
@@ -392,7 +411,13 @@ section {
 }
 
 .article-container {
- text-align: center;
+  text-align: center;
+}
+
+.article__text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 article {
@@ -404,6 +429,10 @@ article {
 
 article .icon {
   cursor: default;
+}
+
+.experience-tech-title {
+  text-align: start;
 }
 
 /* PROJECTS SECTION */
@@ -423,9 +452,10 @@ article .icon {
   height: 90%;
   transition: filter 1.5s ease-in-out;
 }
-.project-img:hover{
+
+.project-img:hover {
   filter: grayscale(95%);
- 
+
 }
 
 .project-title {
@@ -488,6 +518,7 @@ footer {
 footer p {
   text-align: center;
 }
-.about-icon{
+
+.about-icon {
   width: 20px;
 }
