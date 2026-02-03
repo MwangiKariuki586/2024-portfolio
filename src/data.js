@@ -92,11 +92,5 @@ export const projects = [
     github_link: "https://github.com/MwangiKariuki586/learn-hub",
     demo_link: "https://learn-hub-mbul.onrender.com/",
   },
-  {
-    project_name: "E-commerce app",
-    project_image: "/projects/ecommerce.png",
-    github_link: "",
-    demo_link: "https://e-commerce-phi-nine.vercel.app/",
-  }
 
 ];
