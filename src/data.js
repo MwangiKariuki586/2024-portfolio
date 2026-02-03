@@ -84,8 +84,19 @@ export const projects = [
     project_name: "Chat app",
     project_image: "/projects/chat.png",
     github_link: "https://github.com/MwangiKariuki586/chat-app",
-    demo_link: "https://chat-app-two-teal.vercel.app/",
-      
-    
+    demo_link: "https://chat-app-two-teal.vercel.app/",    
+  },
+  {
+    project_name: "Learn Hub",
+    project_image: "/projects/learn_hub.png",
+    github_link: "https://github.com/MwangiKariuki586/learn-hub",
+    demo_link: "https://learn-hub-mbul.onrender.com/",
+  },
+  {
+    project_name: "E-commerce app",
+    project_image: "/projects/ecommerce.png",
+    github_link: "",
+    demo_link: "https://e-commerce-phi-nine.vercel.app/",
   }
+
 ];
