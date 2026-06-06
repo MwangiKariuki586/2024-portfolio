@@ -1,96 +1,43 @@
-import React, { useContext, useState, useEffect } from "react";
-import UserContext from "../context/UserContext";
-import experience_logo from "../assets/experience.png";
-import education_logo from "../assets/education.png";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { about } from "../data";
+import { FiMapPin } from "react-icons/fi";
+import { about, skillGroups } from "../data";
+import { SkeletonBlock } from "./LoadingStates";
 
 const About = () => {
-  // const { about } = useContext(UserContext);
-  const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   if (about) {
-  //     setLoading(false);
-  //   }
-  // }, [about]);
-
-  const defaultImage = {
-    contentType: "image/png",
-    data: "", // default empty base64 string
-  };
-
-  // if (loading) {
-  //   return <div>Loading...</div>; // Display a loading message or spinner
-  // }
-
   return (
-    <section id="about">
-      <p className="section__text__p1">Get To Know More</p>
-      <h1 className="title">About Me</h1>
-      <div className="section-container">
-        <div className="section__pic-container">
-          {about.second_image_url && about.second_image_url.length > 0 ? (
-            <img
-              src={about?.second_image_url}
-              alt="Profile picture"
-              className="about-pic"
-            />
+    <section id="about" className="section about-section">
+      <div className="about-card">
+        <div className="about-card__image">
+          {about.second_image_url ? (
+            <img src={about.second_image_url} alt={`${about.full_name} profile`} />
           ) : (
-            <Skeleton className="about-pic" />
+            <SkeletonBlock className="profile-skeleton" />
           )}
         </div>
-        <div className="about-details-container">
-          <div className="about-containers">
-            <div className="details-container">
-              <img
-                src={experience_logo}
-                alt="Experience icon"
-                className="png-icon"
-              />
-              <h3>Experience</h3>
-              {about.second_image_url && about.second_image_url.length > 0 ? (
-                <p>
-                  {about?.years_of_experience ?? ""} years of <br />
-                  Fullstack Development
-                </p>
-              ) : (
-                <Skeleton count={3} borderRadius="2rem" />
-              )}
-            </div>
 
-            <div className="details-container">
-              <img
-                src={education_logo}
-                alt="Education icon"
-                className="png-icon"
-              />
-              <h3>Education</h3>
-              <p>
-                {about?.course_studied ?? (
-                  <Skeleton count={3} borderRadius="2rem" />
-                )}
-              </p>
-              <h5>KCA Universtity</h5>
-            </div>
-          </div>
-          <div className="text-container">
-            <p>
-              {about?.description ?? (
-                <Skeleton height={150} borderRadius="2rem" />
-              )}
-            </p>
+        <div className="about-card__content">
+          <p className="eyebrow">About</p>
+          <h2>{about.full_name}</h2>
+          <p>{about.description}</p>
+          <div className="location-pill">
+            <FiMapPin aria-hidden="true" />
+            {about.location}
           </div>
         </div>
       </div>
-      <MdOutlineKeyboardDoubleArrowDown
-        className="icon arrow"
-        onClick={() => {
-          window.location.hash = "#experience";
-        }}
-      />
+
+      <div className="skill-grid">
+        {skillGroups.map((group) => (
+          <article className="skill-card" key={group.title}>
+            <h3>{group.title}</h3>
+            <p>{group.description}</p>
+            <div className="skill-list">
+              {group.items.map((item) => (
+                <span key={item.technology}>{item.technology}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 };

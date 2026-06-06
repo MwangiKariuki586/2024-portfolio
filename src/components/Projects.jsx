@@ -1,60 +1,110 @@
-import React, { useContext } from "react";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
-import UserContext from "../context/UserContext";
-import { staticfiles } from "../vaiables";
-import Skeleton from "react-loading-skeleton";
-import { projects } from "../data";
+import { FiArrowRight, FiArrowUpRight, FiCheckCircle, FiFileText, FiMapPin, FiServer } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { featuredProject, projects } from "../data";
+import { FeaturedBuildSkeleton, ProjectCardSkeleton } from "./LoadingStates";
+
+const projectIcons = [FiFileText, FiServer, FiMapPin];
+
 const Projects = () => {
+  const selectedProjects = projects
+    .filter((project) => project.homepage && project.type === "selected-system")
+    .sort((a, b) => a.priority - b.priority)
+    .slice(0, 3);
+
   return (
-    <section id="projects">
-      <p className="section__text__p1">Browse My Recent</p>
-      <h1 className="title">Projects</h1>
-      <div className="experience-details-container">
-        {projects && projects.length > 0 ? (
-          <div className="about-containers">
-            {projects.map((project, id) => (
-              <div key={id} className="details-container color-container">
-                <div className="article-container">
-                  <img
-                    src={project.project_image}
-                    alt={project.project_name}
-                    className="project-img"
-                  />
-                </div>
-                <h2 className="experience-sub-title project-title">
-                  {project.project_name}
-                </h2>
-                <div className="btn-container">
-                  <button
-                    className="btn btn-color-2 project-btn"
-                    onClick={() => window.open(project.github_link, "_blank")}
-                  >
-                    Github
-                  </button>
-                  <button
-                    className="btn btn-color-2 project-btn"
-                    onClick={() => window.open(project.demo_link, "_blank")}
-                  >
-                    Live Demo
-                  </button>
-                </div>
-              </div>
-            ))}
+    <section id="work" className="section work-section">
+      {featuredProject ? (
+        <article className="featured-card">
+          <div className="featured-card__content">
+            <p className="eyebrow">{featuredProject.eyebrow || "Featured build"}</p>
+            <h2>{featuredProject.title || featuredProject.project_name}</h2>
+            <p>{featuredProject.description}</p>
+
+            <ul className="feature-list">
+              {featuredProject.highlights.map((highlight) => (
+                <li key={highlight}>
+                  <FiCheckCircle aria-hidden="true" />
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+
+            <div className="card-actions">
+              <Link className="inline-link" to="/work">
+                View Case Study <FiArrowRight aria-hidden="true" />
+              </Link>
+              <a
+                className="inline-link"
+                href={featuredProject.liveDemoUrl || featuredProject.demo_link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Live Demo <FiArrowUpRight aria-hidden="true" />
+              </a>
+            </div>
           </div>
-        ) : (
-          <div className="project-skeletons">
-            <Skeleton className="skeleton-size" borderRadius="2rem" />
-            <Skeleton className="skeleton-size" borderRadius="2rem" />
-            <Skeleton className="skeleton-size" borderRadius="2rem" />
+
+          <div className="featured-card__visual">
+            <img
+              src={featuredProject.featured_build_image || featuredProject.image}
+              alt={`${featuredProject.title || featuredProject.project_name} product preview`}
+            />
+            <div className="quote-card">
+              <span>&ldquo;</span>
+              <p>
+                Nganya Transit was built to solve a real daily problem for thousands of commuters
+                in Nairobi.
+              </p>
+              <strong>A product built with purpose.</strong>
+            </div>
           </div>
-        )}
+        </article>
+      ) : (
+        <FeaturedBuildSkeleton />
+      )}
+
+      <div className="systems-card">
+        <div className="systems-card__header">
+          <p className="eyebrow">Selected systems</p>
+          <Link className="systems-card__link" to="/work">
+            View all <FiArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="project-grid" aria-label="Selected systems">
+          {selectedProjects.length > 0
+            ? selectedProjects.map((project, index) => {
+                const Icon = projectIcons[index] || FiFileText;
+                const title = project.title || project.project_name;
+                const liveDemoUrl = project.liveDemoUrl || project.demo_link;
+
+                return (
+                  <article className="project-card" key={project.id || title}>
+                    <div className="project-card__main">
+                      <div className="project-card__icon">
+                        <Icon aria-hidden="true" />
+                      </div>
+                      <div className="project-card__body">
+                        <h3>{title}</h3>
+                        <p>{project.description}</p>
+                      </div>
+                    </div>
+                    <div className="project-card__meta">
+                      <div className="tag-row project-card__tags">
+                        {project.tech.map((item) => (
+                          <span key={item}>{item}</span>
+                        ))}
+                      </div>
+                      <a href={liveDemoUrl} target="_blank" rel="noreferrer" className="project-card__arrow">
+                        <FiArrowRight aria-hidden="true" />
+                        <span className="sr-only">Open {title}</span>
+                      </a>
+                    </div>
+                  </article>
+                );
+              })
+            : [0, 1, 2].map((item) => <ProjectCardSkeleton key={item} />)}
+        </div>
       </div>
-      <MdOutlineKeyboardDoubleArrowDown
-        className="icon arrow"
-        onClick={() => {
-          window.location.hash = "#contact";
-        }}
-      />
     </section>
   );
 };

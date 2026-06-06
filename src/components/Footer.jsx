@@ -1,38 +1,23 @@
-import React from "react";
-import about_icon from "../assets/about.png";
-import experience_icon from "../assets/quality.png";
-import project_icon from "../assets/project-management.png";
-import contact_icon from "../assets/letter.png";
+import { about, navigation } from "../data";
+import { FiZap } from "react-icons/fi";
+
 const Footer = () => {
   return (
-    <footer>
-      <nav>
-        <div className="nav-links-container">
-          <ul className="nav-links">
-            <li>
-              <a href="#about">
-                <img className="about-icon" src={about_icon} alt="" />
-              </a>
-            </li>
-            <li>
-              <a href="#experience">
-                <img className="about-icon" src={experience_icon} alt="" />
-              </a>
-            </li>
-            <li>
-              <a href="#projects">
-                <img className="about-icon" src={project_icon} alt="" />
-              </a>
-            </li>
-            {/* <li>
-              <a href="#contact">
-                <img className="about-icon" src={contact_icon} alt="" />
-              </a>
-            </li> */}
-          </ul>
-        </div>
+    <footer className="site-footer">
+      <a className="brand" href="#home">
+        <span className="brand__mark">
+          <FiZap aria-hidden="true" />
+        </span>
+        <span>{about.brand}</span>
+      </a>
+      <nav aria-label="Footer navigation">
+        {navigation.map((item) => (
+          <a href={item.href} key={item.href}>
+            {item.label}
+          </a>
+        ))}
       </nav>
-      <p>Copyright &#169; 2024 Alex Mwangi. All Rights Reserved.</p>
+      <p>Copyright &#169; 2026 {about.full_name}. All Rights Reserved.</p>
     </footer>
   );
 };

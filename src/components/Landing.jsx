@@ -1,109 +1,76 @@
-import  {  useState, useEffect } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import {about} from "../data"
+import { useState } from "react";
+import { FiArrowRight, FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { about } from "../data";
+import { CometLoader, HeroVisualSkeleton } from "./LoadingStates";
 
 const Landing = () => {
- // const { about } = useContext(UserContext);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (about) {
-      setLoading(false);
-    }
-  }, [about]);
-
-  const defaultImage = {
-    contentType: "image/png",
-    data: "", // default empty base64 string
-  };
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [resumeLoading, setResumeLoading] = useState(false);
 
   const handleResumeDownload = () => {
-    // Directly use the resume path from the about object
+    setResumeLoading(true);
     const link = document.createElement("a");
     link.href = about.resume;
-    link.download = "Alex Mwangi Fullstack developer resume.pdf";
-    link.target = "_blank"; // Open in a new tab if download doesn't start
+    link.download = "Alex Mwangi Fullstack Developer Resume.pdf";
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    window.setTimeout(() => setResumeLoading(false), 600);
   };
 
-  if (loading) {
-    return <Skeleton />; // Display a loading message or spinner
-  }
-
   return (
-    <section id="profile">
-      <div className="section__pic-container">
-        {about?.first_image_url && about.first_image_url.length > 0 ? (
-          <img className="regalia" src={about.first_image_url} alt="" />
-        ) : (
-          <Skeleton className="regalia" />
-        )}
-      </div>
-      <div className="section__text">
-        <p className="section__text__p1">{about?.greetings ?? <Skeleton />}</p>
-        <h1 className="title">{about?.full_name ?? <Skeleton />}</h1>
-        <p className="section__text__p2">{about?.title ?? <Skeleton />}</p>
-        <div className="btn-container">
-          {about?.first_image_url && about.first_image_url.length > 0 ? (
-            <button
-              className="btn btn-color-2"
-              onClick={handleResumeDownload}
-            >
-              Download CV
-            </button>
-          ) : (
-            <Skeleton width="8rem" borderRadius="2rem" height="3rem" />
-          )}
-          {about?.first_image_url && about.first_image_url.length > 0 ? (
-            <button
-              className="btn btn-color-1"
-              onClick={() => {
-                window.location.hash = "#contact";
-              }}
-            >
-              Contact Info
-            </button>
-          ) : (
-            <Skeleton width="8rem" borderRadius="2rem" height="3rem" />
-          )}
+    <section id="home" className="hero-section">
+      <div className="hero-copy">
+        <p className="eyebrow">{about.intro_label}</p>
+        <h1>
+          I build practical
+          <br />
+          <span className="headline-nowrap">
+            software for <span className="headline-accent">real</span>
+          </span>
+          <br />
+          <span className="headline-accent headline-nowrap">
+            world <span className="headline-underline">workflows.</span>
+          </span>
+        </h1>
+        <p className="hero-copy__text">{about.hero_copy}</p>
+
+        <div className="hero-actions">
+          <a className="button button--primary" href="#work">
+            View My Work <FiArrowRight aria-hidden="true" />
+          </a>
+          {/* <button className="text-action" type="button" onClick={handleResumeDownload}>
+            {resumeLoading ? <CometLoader label="Preparing resume" /> : null}
+            Download CV <FiDownload aria-hidden="true" />
+          </button> */}
         </div>
-        <div id="socials-container">
-          {about?.first_image_url && about.first_image_url.length > 0 ? (
-            <FaLinkedin
-              className="icon"
-              onClick={() => {
-                if (about?.linkedin) {
-                  window.open(about.linkedin, "_blank");
-                }
-              }}
-            />
-          ) : (
-            <Skeleton width="3rem" borderRadius="50%" height="3rem" />
-          )}
-          {about?.first_image_url && about.first_image_url.length > 0 ? (
-            <FaGithub
-              className="icon"
-              onClick={() => {
-                if (about?.github) {
-                  window.open(about.github, "_blank");
-                }
-              }}
-            />
-          ) : (
-            <Skeleton width="3rem" borderRadius="50%" height="3rem" />
-          )}
+
+        <div className="connect-row">
+          <span>Let&apos;s connect</span>
+          <div className="social-row" aria-label="Contact shortcuts">
+            <a href={about.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
+              <FiGithub />
+            </a>
+            <a href={about.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+              <FiLinkedin />
+            </a>
+            <a href={`mailto:${about.email}`} aria-label="Email Alex">
+              <FiMail />
+            </a>
+          </div>
         </div>
       </div>
-      {/* <MdOutlineKeyboardDoubleArrowDown
-        className="icon arrow"
-        onClick={() => {
-          window.location.hash = "#about";
-        }}
-      /> */}
+
+      <div className="hero-visual">
+        {!imageLoaded && <HeroVisualSkeleton />}
+        <img
+          className={`hero-visual__image ${imageLoaded ? "hero-visual__image--loaded" : ""}`}
+          src={about.hero_showcase_image}
+          alt="Nganya Transit laptop and mobile product showcase"
+          onLoad={() => setImageLoaded(true)}
+        />
+      </div>
     </section>
   );
 };
