@@ -1,23 +1,12 @@
-import { about, navigation } from "../data";
-import { FiZap } from "react-icons/fi";
+import { about } from "../data";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="site-footer">
-      <a className="brand" href="#home">
-        <span className="brand__mark">
-          <FiZap aria-hidden="true" />
-        </span>
-        <span>{about.brand}</span>
-      </a>
-      <nav aria-label="Footer navigation">
-        {navigation.map((item) => (
-          <a href={item.href} key={item.href}>
-            {item.label}
-          </a>
-        ))}
-      </nav>
-      <p>Copyright &#169; 2026 {about.full_name}. All Rights Reserved.</p>
+      <span>&copy; {year} {about.brand}. All rights reserved.</span>
+      <span>Building practical software for real-world workflows.</span>
     </footer>
   );
 };

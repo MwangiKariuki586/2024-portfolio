@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Experience from "../components/Experience";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const Home = () => {
       <Projects />
       <Experience />
       <Contact />
+      <Footer />
     </div>
   );
 };

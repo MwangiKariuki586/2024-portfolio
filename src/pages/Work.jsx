@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { about, contactLinks, projects } from "../data";
 
 const pageSize = 9;
@@ -245,57 +246,8 @@ const Work = () => {
           </div>
         </section>
 
-        <section className="work-contact-card" aria-labelledby="work-contact-title">
-          <div className="work-contact-card__image">
-            <img src={about.first_image_url} alt={`${about.full_name} portrait`} />
-          </div>
-
-          <div className="work-contact-card__content">
-            <h2 id="work-contact-title">Have a project in mind?</h2>
-            <p>
-              I&apos;m available for full-time roles, freelance projects, and collaborations around
-              practical digital systems.
-            </p>
-            <div className="work-contact-actions">
-              {contactLinks.map((link) => {
-                const isResume = link.label === "Resume";
-                const isEmail = link.label === "Email";
-                const isGithub = link.label === "GitHub";
-                const isLinkedIn = link.label === "LinkedIn";
-
-                return (
-                  <a
-                    className={`button ${isEmail ? "button--primary" : "button--secondary"}`}
-                    href={link.href}
-                    key={link.label}
-                    target={link.href.startsWith("http") || isResume ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") || isResume ? "noreferrer" : undefined}
-                  >
-                    {isEmail && <FiMail aria-hidden="true" />}
-                    {isResume && <FiDownload aria-hidden="true" />}
-                    {isGithub && <FiGithub aria-hidden="true" />}
-                    {isLinkedIn && <FiLinkedin aria-hidden="true" />}
-                    {isEmail ? "Email Me" : isResume ? "Download Resume" : link.label}
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="work-location">
-            <div>
-              <FiMapPin aria-hidden="true" />
-              <strong>{about.location}</strong>
-            </div>
-            <p>Open to opportunities and meaningful collaborations.</p>
-          </div>
-        </section>
-
-        <footer className="work-footer">
-          <span>&copy; 2024 {about.brand}. All rights reserved.</span>
-          <span>Built with care around useful software.</span>
-        </footer>
       </main>
+      <Footer />
     </div>
   );
 };
