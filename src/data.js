@@ -124,7 +124,7 @@ export const projects = [
     homepage: true,
     priority: 3,
     description:
-      "A practical ordering flow for menus, customer requests, payment readiness, and kitchen coordination.",
+      "A service marketplace app that helps users discover providers, promote their own services, and connect around local work opportunities.",
     image: "/projects/veterans_bay.png",
     project_image: "/projects/veterans_bay.png",
     githubUrl: "https://github.com/MwangiKariuki586/veterans-bay",
@@ -143,7 +143,7 @@ export const projects = [
     homepage: true,
     priority: 4,
     description:
-      "A scheduling and allocation experience designed around availability, booking rules, and operational clarity.",
+      "A Kenya-focused rental platform that connects landlords directly with tenants, helping renters find homes without relying on unreliable agents.",
     image: "/projects/verified_nyumba.png",
     project_image: "/projects/verified_nyumba.png",
     githubUrl: "https://github.com/MwangiKariuki586/house-hunting-app",
@@ -153,16 +153,16 @@ export const projects = [
     tech: ["React", "APIs", "Dashboards"],
   },
   {
-    id: "ai-document-assistant",
-    title: "AI Document Assistant",
-    project_name: "AI Document Assistant",
-    category: "Automation",
+    id: "learn-hub",
+    title: "Learn Hub",
+    project_name: "Learn Hub",
+    category: "Education",
     type: "selected-system",
     featured: false,
     homepage: true,
     priority: 2,
     description:
-      "A workflow tool for turning document-heavy tasks into structured, searchable, and faster review experiences.",
+      "A short-course learning app that helps users browse focused lessons, follow structured course content, and build skills at their own pace.",
     image: "/projects/learn_hub.png",
     project_image: "/projects/learn_hub.png",
     githubUrl: "https://github.com/MwangiKariuki586/learn-hub",
@@ -202,25 +202,25 @@ export const processSteps = [
     number: "01",
     title: "Understand",
     description:
-      "I learn the workflow, user needs, business rules, and edge cases before building.",
+      "Learn the workflow, user needs, business rules, and edge cases before building.",
   },
   {
     number: "02",
     title: "Design",
     description:
-      "I map the system, define interfaces, structure data models, and plan the product flow.",
+      "Map the system, define interfaces, structure data models, and plan the product flow.",
   },
   {
     number: "03",
     title: "Build",
     description:
-      "I write clean, scalable code with reusable components, reliable APIs, and performance in mind.",
+      "Write clean, scalable code with reusable components, reliable APIs, and performance in mind.",
   },
   {
     number: "04",
     title: "Improve",
     description:
-      "I test, gather feedback, fix issues, and refine the product for continuous improvement.",
+      "Test, gather feedback, fix issues, and refine the product for continuous improvement.",
   },
 ];
 
