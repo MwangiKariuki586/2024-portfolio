@@ -109,11 +109,10 @@ export const projects = [
       "Clean, minimal booking flow",
     ],
     tech: ["React", "Node.js", "Maps", "Realtime UX"],
-    caseStudyUrl: "#work",
     liveDemoUrl: "https://nganya-transit.vercel.app/",
     demo_link: "https://nganya-transit.vercel.app/",
-    githubUrl: "",
-    github_link: "",
+    githubUrl: "https://github.com/MwangiKariuki586/Nganya-Transit",
+    github_link: "https://github.com/MwangiKariuki586/Nganya-Transit",
   },
    {
     id: "veterans-bay",

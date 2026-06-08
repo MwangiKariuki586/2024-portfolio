@@ -3,6 +3,7 @@ import {
   FiArrowUpRight,
   FiCheckCircle,
   FiFileText,
+  FiGithub,
   FiMapPin,
   FiServer,
 } from "react-icons/fi";
@@ -57,20 +58,24 @@ const Projects = () => {
           </div>
 
           <div className="card-actions">
-            <Link
-              className="inline-link featured-card__action featured-card__action--primary"
-              to="/work"
-            >
-              View Case Study <FiArrowRight aria-hidden="true" />
-            </Link>
             <a
-              className="inline-link featured-card__action featured-card__action--secondary"
+              className="inline-link featured-card__action featured-card__action--primary"
               href={featuredProject.liveDemoUrl || featuredProject.demo_link}
               target="_blank"
               rel="noreferrer"
             >
               Live Demo <FiArrowUpRight aria-hidden="true" />
             </a>
+            {(featuredProject.githubUrl || featuredProject.github_link) && (
+              <a
+                className="inline-link featured-card__action featured-card__action--secondary"
+                href={featuredProject.githubUrl || featuredProject.github_link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub <FiGithub aria-hidden="true" />
+              </a>
+            )}
           </div>
         </article>
       ) : (

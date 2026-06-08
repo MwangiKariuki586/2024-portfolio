@@ -430,6 +430,35 @@ img {
   grid-row: 2;
 }
 
+.featured-card .card-actions {
+  gap: 12px;
+  align-items: center;
+  margin-top: 0;
+}
+
+.featured-card__action {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.featured-card__action--primary {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #0f8437, #066c2a);
+  box-shadow: 0 16px 30px rgba(15, 121, 49, 0.2);
+}
+
+.featured-card__action--secondary {
+  color: var(--green) !important;
+  background: rgba(15, 121, 49, 0.08);
+}
+
+.featured-card__action svg {
+  color: currentColor;
+}
+
 .featured-card__content h2,
 .about-card h2,
 .contact-card h2 {

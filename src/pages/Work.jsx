@@ -8,7 +8,6 @@ import {
   FiGithub,
   FiUsers,
 } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { about, projects } from "../data";
@@ -154,11 +153,6 @@ const Work = () => {
 
                   <div className="archive-card__actions">
                     <div className="archive-card__links">
-                      {project.caseStudyUrl && (
-                        <Link className="inline-link" to="/#work">
-                          View Case Study <FiArrowUpRight aria-hidden="true" />
-                        </Link>
-                      )}
                       {liveDemoUrl && (
                         <a
                           className="inline-link"
