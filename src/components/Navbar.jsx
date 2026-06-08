@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiMenu, FiX, FiZap } from "react-icons/fi";
+import { FiBriefcase, FiCode, FiHome, FiMail, FiMenu, FiX } from "react-icons/fi";
 import { LiaMedalSolid } from "react-icons/lia";
 import { Link, useLocation } from "react-router-dom";
 import { about, navigation } from "../data";
@@ -76,61 +76,95 @@ const Navbar = () => {
     closeMenu();
   };
 
+  const navIcons = {
+    Home: FiHome,
+    Work: FiBriefcase,
+    Process: FiCode,
+    Contact: FiMail,
+  };
+
   return (
-    <header className="site-header">
-      <nav className="navbar" aria-label="Primary navigation">
-        <Link className="brand" to="/#home" onClick={closeMenu}>
-          <span className="brand__mark">
-            <LiaMedalSolid  aria-hidden="true" />
-          </span>
-          <span>{about.brand}</span>
-        </Link>
+    <>
+      <header className="site-header">
+        <nav className="navbar" aria-label="Primary navigation">
+          <Link className="brand" to="/#home" onClick={closeMenu}>
+            <span className="brand__mark">
+              <LiaMedalSolid  aria-hidden="true" />
+            </span>
+            <span>{about.brand}</span>
+          </Link>
 
-        <ul className="nav-links">
-          {navigation.map((item) => (
-            <li key={item.href}>
-              <Link
-                to={item.href}
-                aria-current={isActive(item) ? "page" : undefined}
-                onClick={() => handleNavClick(item.href)}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+          <ul className="nav-links">
+            {navigation.map((item) => (
+              <li key={item.href}>
+                <Link
+                  to={item.href}
+                  aria-current={isActive(item) ? "page" : undefined}
+                  onClick={() => handleNavClick(item.href)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        <Link className="nav-cta" to="/#contact">
-          Let&apos;s Talk
-        </Link>
+          <Link className="nav-cta" to="/#contact">
+            Let&apos;s Talk
+          </Link>
 
-        <button
-          className="menu-toggle"
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <FiX /> : <FiMenu />}
-        </button>
-      </nav>
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <FiX /> : <FiMenu />}
+          </button>
+        </nav>
+      </header>
+
+      <button
+        className={`mobile-backdrop ${open ? "mobile-backdrop--open" : ""}`}
+        type="button"
+        aria-label="Close menu"
+        onClick={closeMenu}
+      />
 
       <div className={`mobile-panel ${open ? "mobile-panel--open" : ""}`}>
-        {navigation.map((item) => (
-          <Link
-            to={item.href}
-            key={item.href}
-            aria-current={isActive(item) ? "page" : undefined}
-            onClick={() => handleNavClick(item.href)}
-          >
-            {item.label}
-          </Link>
-        ))}
+        <div className="mobile-panel__header">
+          <div className="mobile-panel__brand">
+            <span className="brand__mark">
+              <LiaMedalSolid aria-hidden="true" />
+            </span>
+            <span>{about.brand}</span>
+          </div>
+          <button className="mobile-panel__close" type="button" aria-label="Close menu" onClick={closeMenu}>
+            <FiX aria-hidden="true" />
+          </button>
+        </div>
+
+        {navigation.map((item) => {
+          const Icon = navIcons[item.label] || FiHome;
+
+          return (
+            <Link
+              className="mobile-panel__link"
+              to={item.href}
+              key={item.href}
+              aria-current={isActive(item) ? "page" : undefined}
+              onClick={() => handleNavClick(item.href)}
+            >
+              <Icon aria-hidden="true" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
         <Link className="mobile-panel__cta" to="/#contact" onClick={closeMenu}>
           Let&apos;s Talk
         </Link>
       </div>
-    </header>
+    </>
   );
 };
 

@@ -1,4 +1,11 @@
-import { FiArrowRight, FiArrowUpRight, FiCheckCircle, FiFileText, FiMapPin, FiServer } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiArrowUpRight,
+  FiCheckCircle,
+  FiFileText,
+  FiMapPin,
+  FiServer,
+} from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { featuredProject, projects } from "../data";
 import { FeaturedBuildSkeleton, ProjectCardSkeleton } from "./LoadingStates";
@@ -16,7 +23,9 @@ const Projects = () => {
       {featuredProject ? (
         <article className="featured-card">
           <div className="featured-card__content">
-            <p className="eyebrow">{featuredProject.eyebrow || "Featured build"}</p>
+            <p className="eyebrow">
+              {featuredProject.eyebrow || "Featured build"}
+            </p>
             <h2>{featuredProject.title || featuredProject.project_name}</h2>
             <p>{featuredProject.description}</p>
 
@@ -28,35 +37,40 @@ const Projects = () => {
                 </li>
               ))}
             </ul>
-
-            <div className="card-actions">
-              <Link className="inline-link" to="/work">
-                View Case Study <FiArrowRight aria-hidden="true" />
-              </Link>
-              <a
-                className="inline-link"
-                href={featuredProject.liveDemoUrl || featuredProject.demo_link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Live Demo <FiArrowUpRight aria-hidden="true" />
-              </a>
-            </div>
           </div>
 
           <div className="featured-card__visual">
             <img
-              src={featuredProject.featured_build_image || featuredProject.image}
+              src={
+                featuredProject.featured_build_image || featuredProject.image
+              }
               alt={`${featuredProject.title || featuredProject.project_name} product preview`}
             />
             <div className="quote-card">
               <span>&ldquo;</span>
               <p>
-                Nganya Transit was built to solve a real daily problem for thousands of commuters
-                in Nairobi.
+                Nganya Transit was built to solve a real daily problem for
+                thousands of commuters in Nairobi.
               </p>
               <strong>A product built with purpose.</strong>
             </div>
+          </div>
+
+          <div className="card-actions">
+            <Link
+              className="inline-link featured-card__action featured-card__action--primary"
+              to="/work"
+            >
+              View Case Study <FiArrowRight aria-hidden="true" />
+            </Link>
+            <a
+              className="inline-link featured-card__action featured-card__action--secondary"
+              href={featuredProject.liveDemoUrl || featuredProject.demo_link}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Live Demo <FiArrowUpRight aria-hidden="true" />
+            </a>
           </div>
         </article>
       ) : (
@@ -78,7 +92,14 @@ const Projects = () => {
                 const liveDemoUrl = project.liveDemoUrl || project.demo_link;
 
                 return (
-                  <article className="project-card" key={project.id || title}>
+                  <a
+                    className="project-card"
+                    key={project.id || title}
+                    href={liveDemoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${title}`}
+                  >
                     <div className="project-card__main">
                       <div className="project-card__icon">
                         <Icon aria-hidden="true" />
@@ -94,12 +115,11 @@ const Projects = () => {
                           <span key={item}>{item}</span>
                         ))}
                       </div>
-                      <a href={liveDemoUrl} target="_blank" rel="noreferrer" className="project-card__arrow">
+                      <span className="project-card__arrow" aria-hidden="true">
                         <FiArrowRight aria-hidden="true" />
-                        <span className="sr-only">Open {title}</span>
-                      </a>
+                      </span>
                     </div>
-                  </article>
+                  </a>
                 );
               })
             : [0, 1, 2].map((item) => <ProjectCardSkeleton key={item} />)}

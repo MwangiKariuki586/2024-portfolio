@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { FiArrowRight, FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiDownload,
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+} from "react-icons/fi";
 import { about } from "../data";
 import { CometLoader, HeroVisualSkeleton } from "./LoadingStates";
 
@@ -46,7 +52,7 @@ const Landing = () => {
           </button> */}
         </div>
 
-        <div className="connect-row">
+        {/* <div className="connect-row">
           <span>Let&apos;s connect</span>
           <div className="social-row" aria-label="Contact shortcuts">
             <a href={about.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
@@ -59,7 +65,7 @@ const Landing = () => {
               <FiMail />
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="hero-visual">

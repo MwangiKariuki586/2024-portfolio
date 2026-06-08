@@ -16,7 +16,14 @@ const Home = () => {
     const section = document.getElementById(location.hash.slice(1));
     if (section) {
       window.requestAnimationFrame(() => {
-        section.scrollIntoView({ block: "start" });
+        const header = document.querySelector(".site-header");
+        const headerOffset = header ? header.getBoundingClientRect().height + 18 : 0;
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+
+        window.scrollTo({
+          top: Math.max(sectionTop - headerOffset, 0),
+          behavior: "smooth",
+        });
       });
     }
   }, [location.hash]);
