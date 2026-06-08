@@ -5,19 +5,13 @@ import {
   FiArrowUpRight,
   FiBox,
   FiCode,
-  FiDownload,
   FiGithub,
-  FiGrid,
-  FiLinkedin,
-  FiMail,
-  FiMapPin,
-  FiSearch,
   FiUsers,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { about, contactLinks, projects } from "../data";
+import { about, projects } from "../data";
 
 const pageSize = 9;
 
@@ -25,55 +19,29 @@ const getProjectTitle = (project) => project.title || project.project_name;
 const getProjectImage = (project) => project.image || project.project_image;
 const getLiveDemoUrl = (project) => project.liveDemoUrl || project.demo_link;
 const getGithubUrl = (project) => project.githubUrl || project.github_link;
+const filters = ["All Projects", "Web Applications", "Mobile Applications"];
 
 const Work = () => {
   const [activeFilter, setActiveFilter] = useState("All Projects");
-  const [query, setQuery] = useState("");
-  const [sortMode, setSortMode] = useState("priority");
   const [page, setPage] = useState(1);
 
-  const filters = useMemo(() => {
-    const categories = [...new Set(projects.map((project) => project.category).filter(Boolean))];
-    return ["All Projects", "Featured", ...categories, "Other"];
-  }, []);
-
   const visibleProjects = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-
     return [...projects]
       .filter((project) => {
         if (activeFilter === "All Projects") return true;
-        if (activeFilter === "Featured") return project.featured;
-        if (activeFilter === "Other") {
-          return !filters.includes(project.category) || project.type === "archive";
-        }
-        return project.category === activeFilter;
+        return project.platform === activeFilter;
       })
-      .filter((project) => {
-        if (!normalizedQuery) return true;
-
-        const searchable = [
-          getProjectTitle(project),
-          project.category,
-          project.description,
-          ...(project.tech || []),
-        ]
-          .join(" ")
-          .toLowerCase();
-
-        return searchable.includes(normalizedQuery);
-      })
-      .sort((a, b) => {
-        if (sortMode === "title") return getProjectTitle(a).localeCompare(getProjectTitle(b));
-        if (sortMode === "featured") return Number(b.featured) - Number(a.featured) || a.priority - b.priority;
-        return a.priority - b.priority;
-      });
-  }, [activeFilter, filters, query, sortMode]);
+      .sort((a, b) => a.priority - b.priority);
+  }, [activeFilter]);
 
   const pageCount = Math.max(1, Math.ceil(visibleProjects.length / pageSize));
   const currentPage = Math.min(page, pageCount);
-  const pagedProjects = visibleProjects.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-  const firstVisible = visibleProjects.length === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+  const pagedProjects = visibleProjects.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+  const firstVisible =
+    visibleProjects.length === 0 ? 0 : (currentPage - 1) * pageSize + 1;
   const lastVisible = Math.min(currentPage * pageSize, visibleProjects.length);
 
   const handleFilterChange = (filter) => {
@@ -81,25 +49,23 @@ const Work = () => {
     setPage(1);
   };
 
-  const handleQueryChange = (event) => {
-    setQuery(event.target.value);
-    setPage(1);
-  };
-
   return (
     <div>
       <Navbar />
       <main className="work-page">
-        <section className="work-archive-hero" aria-labelledby="work-page-title">
+        <section
+          className="work-archive-hero"
+          aria-labelledby="work-page-title"
+        >
           <div className="work-archive-hero__copy">
-           
             <p className="eyebrow eyebrow--dot">My work</p>
             <h1 id="work-page-title">
-              Systems I&apos;ve built for <span>real-world workflows.</span>
+              Solutions that drive <span>real-world Impact.</span>
             </h1>
             <p>
-              A collection of products and systems I&apos;ve designed and built to solve practical
-              problems, automate processes, and improve everyday operations.
+              A collection of products I&apos;ve designed and built to solve
+              practical problems, automate processes, and improve everyday
+              operations.
             </p>
           </div>
 
@@ -130,7 +96,10 @@ const Work = () => {
 
         <section className="work-board" aria-label="Project archive">
           <div className="work-toolbar">
-            <div className="filter-row" aria-label="Project filters">
+            <div
+              className="filter-row filter-row--tabs"
+              aria-label="Project filters"
+            >
               {filters.map((filter) => (
                 <button
                   className={`filter-chip ${activeFilter === filter ? "filter-chip--active" : ""}`}
@@ -138,28 +107,24 @@ const Work = () => {
                   key={filter}
                   onClick={() => handleFilterChange(filter)}
                 >
-                  {filter === "All Projects" && <FiGrid aria-hidden="true" />}
                   {filter}
                 </button>
               ))}
             </div>
 
-            <div className="work-search-row">
-              <label className="search-field">
-                <FiSearch aria-hidden="true" />
-                <span className="sr-only">Search projects</span>
-                <input value={query} onChange={handleQueryChange} placeholder="Search projects..." />
-              </label>
-
-              <label className="sort-field">
-                <span className="sr-only">Sort projects</span>
-                <select value={sortMode} onChange={(event) => setSortMode(event.target.value)}>
-                  <option value="priority">Newest</option>
-                  <option value="featured">Featured</option>
-                  <option value="title">A-Z</option>
-                </select>
-              </label>
-            </div>
+            <label className="filter-select">
+              <span className="sr-only">Filter projects</span>
+              <select
+                value={activeFilter}
+                onChange={(event) => handleFilterChange(event.target.value)}
+              >
+                {filters.map((filter) => (
+                  <option value={filter} key={filter}>
+                    {filter}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
 
           <div className="archive-grid" aria-live="polite">
@@ -188,18 +153,30 @@ const Work = () => {
                   </div>
 
                   <div className="archive-card__actions">
-                    {project.caseStudyUrl && (
-                      <Link className="inline-link" to="/#work">
-                        View Case Study <FiArrowUpRight aria-hidden="true" />
-                      </Link>
-                    )}
-                    {liveDemoUrl && (
-                      <a className="inline-link" href={liveDemoUrl} target="_blank" rel="noreferrer">
-                        Live Demo <FiArrowUpRight aria-hidden="true" />
-                      </a>
-                    )}
+                    <div className="archive-card__links">
+                      {project.caseStudyUrl && (
+                        <Link className="inline-link" to="/#work">
+                          View Case Study <FiArrowUpRight aria-hidden="true" />
+                        </Link>
+                      )}
+                      {liveDemoUrl && (
+                        <a
+                          className="inline-link"
+                          href={liveDemoUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Live Demo <FiArrowUpRight aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
                     {githubUrl && (
-                      <a className="archive-card__github" href={githubUrl} target="_blank" rel="noreferrer">
+                      <a
+                        className="archive-card__github"
+                        href={githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <FiGithub aria-hidden="true" />
                         <span className="sr-only">Open {title} on GitHub</span>
                       </a>
@@ -219,19 +196,27 @@ const Work = () => {
 
           <div className="archive-pagination" aria-label="Project pagination">
             <div className="pagination-controls">
-              <button type="button" disabled={currentPage === 1} onClick={() => setPage((value) => value - 1)}>
+              <button
+                type="button"
+                disabled={currentPage === 1}
+                onClick={() => setPage((value) => value - 1)}
+              >
                 <FiArrowLeft aria-hidden="true" />
               </button>
-              {Array.from({ length: pageCount }, (_, index) => index + 1).map((item) => (
-                <button
-                  className={currentPage === item ? "pagination-button--active" : ""}
-                  type="button"
-                  key={item}
-                  onClick={() => setPage(item)}
-                >
-                  {item}
-                </button>
-              ))}
+              {Array.from({ length: pageCount }, (_, index) => index + 1).map(
+                (item) => (
+                  <button
+                    className={
+                      currentPage === item ? "pagination-button--active" : ""
+                    }
+                    type="button"
+                    key={item}
+                    onClick={() => setPage(item)}
+                  >
+                    {item}
+                  </button>
+                ),
+              )}
               <button
                 type="button"
                 disabled={currentPage === pageCount}
@@ -241,11 +226,11 @@ const Work = () => {
               </button>
             </div>
             <p>
-              Showing {firstVisible}-{lastVisible} of {visibleProjects.length} projects
+              Showing {firstVisible}-{lastVisible} of {visibleProjects.length}{" "}
+              projects
             </p>
           </div>
         </section>
-
       </main>
       <Footer />
     </div>
