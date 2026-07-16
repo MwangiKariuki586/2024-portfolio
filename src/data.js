@@ -114,7 +114,27 @@ export const projects = [
     githubUrl: "https://github.com/MwangiKariuki586/Nganya-Transit",
     github_link: "https://github.com/MwangiKariuki586/Nganya-Transit",
   },
-   {
+  {
+    id: "document-optimizer",
+    title: "Docufine",
+    project_name: "Docufine",
+    category: "Productivity",
+    platform: "Web Applications",
+    type: "selected-system",
+    featured: false,
+    homepage: true,
+    priority: 2,
+    description:
+      "An AI-powered document workspace for improving content, reviewing suggestions, tracking versions, and exporting polished documents.",
+    image: "/projects/document-optimizer.png",
+    project_image: "/projects/document-optimizer.png",
+    githubUrl: "https://github.com/MwangiKariuki586/document-optimizer-V2",
+    github_link: "https://github.com/MwangiKariuki586/document-optimizer-V2",
+    liveDemoUrl: "https://document-optimizer-v2.vercel.app/",
+    demo_link: "https://document-optimizer-v2.vercel.app/",
+    tech: ["Next.js", "Supabase", "AI"],
+  },
+  {
     id: "veterans-bay",
     title: "Veterans Bay",
     project_name: "Veterans Bay",
